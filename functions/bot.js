@@ -30,7 +30,7 @@ module.exports = (functions, admin) => {
     }
 
     sendMessage = (options) => {
-      const token = functions.config().telegram.bot_key;
+      const token = functions.config().telegram.api_key;
       const url = `https://api.telegram.org/bot${token}/sendMessage`;
 
       axios.post(url, {
@@ -63,7 +63,7 @@ module.exports = (functions, admin) => {
 
     const callToken = req.path;
 
-    if ( callToken !== functions.config().telegram.bot_key ) {
+    if ( callToken === functions.config().telegram.bot_key ) {
       processMessage(req.body.message);
     } else {
       res.sendStatus(403);

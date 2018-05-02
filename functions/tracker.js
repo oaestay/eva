@@ -4,7 +4,7 @@ module.exports = (functions, admin) => {
   module.setUserLocation = (req, res) => {
     const callToken = req.path;
 
-    if ( callToken !== functions.config().ifttt.key ) {
+    if ( callToken === functions.config().ifttt.key ) {
       return admin.database().ref(`/locations/${req.body.user_id}`).push(
         {
           location: req.body.location,
